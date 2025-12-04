@@ -1,0 +1,34 @@
+# INSTRUCTIONS
+# If the file named ".gitignore" did not appear in your file list, 
+# you can manually use this file.
+#
+# 1. Rename this file from "gitignore_backup.txt" to ".gitignore"
+# 
+# WINDOWS TIP: 
+# If Windows complains about the filename, rename it to ".gitignore." (with a trailing dot).
+# Windows will automatically remove the last dot and accept the name.
+
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+node_modules
+dist
+dist-ssr
+*.local
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs
+*.njsproj
+*.sln
+*.sw?
