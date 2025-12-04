@@ -7,7 +7,15 @@ export default defineConfig(({ mode }) => {
     return {
       server: {
         port: 3000,
-        host: '0.0.0.0',
+        strictPort: true,
+        host: true,
+        origin: "http://0.0.0.0:3000",
+        hmr: {
+            clientPort: 3000
+        },
+        watch: {
+            usePolling: true,
+        }
       },
       plugins: [react()],
       define: {
