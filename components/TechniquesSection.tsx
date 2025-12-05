@@ -5,43 +5,12 @@ import TechniqueCard from './TechniqueCard';
 import SectionTitle from './SectionTitle';
 import { useProgressTracker } from '../hooks/useProgressTracker';
 import { Technique } from '../types';
+import { convertTextToUK } from '../utils/textUtils';
 
 const difficultyLevels = ['All', 'Beginner', 'Intermediate', 'Advanced'] as const;
 type DifficultyLevel = typeof difficultyLevels[number];
 
 type Terminology = 'US' | 'UK';
-
-const convertTextToUK = (text: string): string => {
-  // Regex to match US terms. Longer phrases must come first to avoid partial matches.
-  const pattern = /\b(half double crochet|single crochet|double crochet|treble crochet|yarn over|hdc|sc|dc|tr|yo)\b/gi;
-
-  return text.replace(pattern, (match) => {
-    const lower = match.toLowerCase();
-    let replacement = match;
-
-    switch (lower) {
-      case 'single crochet': replacement = 'double crochet'; break;
-      case 'double crochet': replacement = 'treble crochet'; break;
-      case 'half double crochet': replacement = 'half treble crochet'; break;
-      case 'treble crochet': replacement = 'double treble crochet'; break;
-      case 'yarn over': replacement = 'yarn round hook'; break;
-      case 'sc': replacement = 'dc'; break;
-      case 'dc': replacement = 'tr'; break;
-      case 'hdc': replacement = 'htr'; break;
-      case 'tr': replacement = 'dtr'; break;
-      case 'yo': replacement = 'yrh'; break;
-      default: return match;
-    }
-
-    // Preserve casing
-    if (match === match.toUpperCase()) return replacement.toUpperCase();
-    if (match[0] === match[0].toUpperCase()) {
-        // Title case/Sentence case
-        return replacement.charAt(0).toUpperCase() + replacement.slice(1);
-    }
-    return replacement;
-  });
-};
 
 const TechniquesSection: React.FC = () => {
   const { learnedStatus, toggleLearned } = useProgressTracker();
